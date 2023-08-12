@@ -445,7 +445,7 @@ import logo from '../assets/images/logo.svg';
 import styled from 'styled-components';
 const Landing = () => {
   return (
-    <StyledWrapper>
+    <Wrapper>
       <nav>
         <img src={logo} alt='jobify' className='logo' />
       </nav>
@@ -470,7 +470,7 @@ const Landing = () => {
         </div>
         <img src={main} alt='job hunt' className='img main-img' />
       </div>
-    </StyledWrapper>
+    </Wrapper>
   );
 };
 

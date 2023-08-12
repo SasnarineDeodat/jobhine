@@ -1,22 +1,36 @@
-import styled from "styled-components";
+import Wrapper from "../assets/wrappers/LandingPage";
+import main from "../assets/images/main.svg";
+import logo from "../assets/images/logo.svg";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
     <Wrapper>
-      <h1>Landing Page</h1>
-      <div className="content">some content</div>
+      <nav>
+        <img src={logo} alt="jobify" className="logo" />
+      </nav>
+      <div className="container page">
+        <div className="info">
+          <h1>
+            job <span>tracking</span> app
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut sit
+            aspernatur quibusdam voluptas facilis, assumenda pariatur veritatis
+            necessitatibus rem nam nulla eligendi, reprehenderit autem tempora!
+          </p>
+          <Link to="/register" className="btn register-link">
+            Register
+          </Link>
+
+          <Link to="/login" className="btn">
+            Login / Demo User
+          </Link>
+        </div>
+        <img src={main} alt="job hunt" className="img main-img" />
+      </div>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  background: red;
-  h1 {
-    color: white;
-  }
-  .content {
-    background: blue;
-    color: yellow;
-  }
-`;
 export default Landing;
