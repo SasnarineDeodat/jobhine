@@ -7,7 +7,7 @@ const Error = () => {
     <div>
       <h1>Error Page</h1>
       <Link to="/">back home</Link>
-    </div>
+    </div>  
   );
 };
 export default Error;
