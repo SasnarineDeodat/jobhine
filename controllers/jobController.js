@@ -1,45 +1,29 @@
 import Job from "../models/JobModel.js";
+import { StatusCodes } from "http-status-codes";
 
 //Get All Jobs
 export const getAllJobs = async (req, res) => {
   const jobs = await Job.find({});
-  res.status(200).json({ jobs });
+  res.status(StatusCodes.OK).json({ jobs });
 };
 
 //Create Job
 export const createJob = async (req, res) => {
   const job = await Job.create(req.body);
-  res.status(201).json({ job });
+  res.status(StatusCodes.CREATED).json({ job });
 };
 
 // Get Job
 export const getJob = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findById(id);
-  console.log(job);
+
   if (!job) {
     return res.status(404).json({ msg: `no job with id ${id}` });
   }
-  res.status(200).json({ job });
+  res.status(StatusCodes.OK).json({ job });
 };
 
-// EditJob
-export const editJob = async (req, res) => {
-  const { company, position } = req.body;
-  if (!company || !position) {
-    res.status(400).json({ msg: "please provide company and position" });
-    return;
-  }
-  const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
-  }
-  job.company = company;
-  job.position = position;
-
-  res.status(200).json({ msg: "job modified", job });
-};
 // Update Job
 export const updateJob = async (req, res) => {
   const { id } = req.params;
@@ -48,7 +32,7 @@ export const updateJob = async (req, res) => {
     return res.status(404).json({ msg: `no job with id ${id}` });
   }
 
-  res.status(200).json({ msg: "job modified", job: updatedJob });
+  res.status(StatusCodes.OK).json({ msg: "job modified", job: updatedJob });
 };
 
 // Delete Job
@@ -59,5 +43,5 @@ export const deleteJob = async (req, res) => {
   if (!removedJob) {
     return res.status(404).json({ msg: `no job with id ${id}` });
   }
-  res.status(200).json({ msg: "job deleted", job: removedJob });
+  res.status(StatusCodes.OK).json({ msg: "job deleted", job: removedJob });
 };
