@@ -3151,15 +3151,7 @@ app.use(cookieParser());
 authMiddleware.js
 
 ```js
-import { UnauthenticatedError } from '../customErrors.js';
 
-export const authenticateUser = async (req, res, next) => {
-  const { token } = req.cookies;
-  if (!token) {
-    throw new UnauthenticatedError('authentication invalid');
-  }
-  next();
-};
 ```
 
 #### Verify Token
