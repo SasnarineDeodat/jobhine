@@ -15,14 +15,26 @@ export const loader = async ({ params }) => {
     return redirect("/dashboard/all-jobs");
   }
 };
-export const action = async () => {
-  return null;
+export const action = async ({ request, params }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+    await customFetch.patch(`/jobs/${params.id}`, data);
+    toast.success("Job edited successfully");
+    return redirect("/dashboard/all-jobs");
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    return error;
+  }
 };
 
 const EditJob = () => {
   const { job } = useLoaderData();
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -61,4 +73,5 @@ const EditJob = () => {
     </Wrapper>
   );
 };
+
 export default EditJob;
