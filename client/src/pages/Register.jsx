@@ -38,7 +38,7 @@ const Register = () => {
 
         <FormRow type="text" name="location" defaultValue="waterbury" />
 
-        <FormRow type="email" name="email" defaultValue="sasnarine@gamil.com" />
+        <FormRow type="email" name="email" defaultValue="sasnarine@gmail.com" />
 
         <FormRow type="password" name="password" defaultValue="secret123" />
         <button type="submit" className="btn btn-block" disabled={isSubmitting}>
