@@ -23,7 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
   const loginDemoUser = async () => {
     const data = {
-      email: "sasnarinedeodat@gmail.com",
+      email: "test@test.com",
       password: "secret123",
     };
     try {
