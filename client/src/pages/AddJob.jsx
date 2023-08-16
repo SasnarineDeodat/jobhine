@@ -1,26 +1,22 @@
-import { FormRow, FormRowSelect, SubmitBtn } from "../components";
-import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { useOutletContext } from "react-router-dom";
-import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
+import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
+import Wrapper from "../assets/wrappers/DashboardFormPage";
+import { FormRow, FormRowSelect, SubmitBtn } from "../components";
 import customFetch from "../utils/customFetch";
 
-export const action =
-  (queryClient) =>
-  async ({ request }) => {
-    const formData = await request.formData();
-    const data = Object.fromEntries(formData);
-    try {
-      await customFetch.post("/jobs", data);
-      queryClient.invalidateQueries(["jobs"]);
-      toast.success("Job added successfully ");
-      return redirect("all-jobs");
-    } catch (error) {
-      toast.error(error?.response?.data?.msg);
-      return error;
-    }
-  };
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData.entries());
+  try {
+    await customFetch.post("/jobs", data);
+    toast.success("job added successfully");
+    return redirect("all-jobs");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};
 
 const AddJob = () => {
   const { user } = useOutletContext();
@@ -38,6 +34,7 @@ const AddJob = () => {
             name="jobLocation"
             defaultValue={user.location}
           />
+
           <FormRowSelect
             labelText="job status"
             name="jobStatus"
@@ -45,8 +42,8 @@ const AddJob = () => {
             list={Object.values(JOB_STATUS)}
           />
           <FormRowSelect
-            labelText="job type"
             name="jobType"
+            labelText="job type"
             defaultValue={JOB_TYPE.FULL_TIME}
             list={Object.values(JOB_TYPE)}
           />
@@ -56,4 +53,5 @@ const AddJob = () => {
     </Wrapper>
   );
 };
+
 export default AddJob;
